@@ -1,3 +1,4 @@
+
 # Montagem Básica de Contagem de Pressionamentos de Botão
 ## Descrição
 Este projeto demonstra como contar o número de vezes que um botão é pressionado utilizando um Arduino. O objetivo é detectar as transições do estado do botão de desligado (LOW) para ligado (HIGH) e contabilizar cada pressionamento. Os resultados são exibidos no Serial Monitor.
@@ -32,3 +33,4 @@ O programa funciona da seguinte maneira:
 
 * Use a protoboard para montar o circuito e organizar as conexões.
 * Utilize fios de conexão (jumpers) para ligar os componentes ao Arduino.
+![botao](https://github.com/user-attachments/assets/c73839db-3213-497c-a0c6-94e23bb5d495)
