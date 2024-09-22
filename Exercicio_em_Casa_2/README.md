@@ -39,11 +39,8 @@ O programa funciona da seguinte maneira:
 ```
 const int buttonPin = 2;
 const int ledPin = LED_BUILTIN;
-
 int buttonPushCounter = 0;
-
 int buttonState = 0;
-
 int lastButtonState = 0;
 
 void setup() {
