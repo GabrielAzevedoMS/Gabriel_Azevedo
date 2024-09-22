@@ -1,4 +1,4 @@
-# Contagem de pressionamentos de botão.
+# Ligar e desligar o LED com o botão.
 
 
 ## Descrição
@@ -25,39 +25,27 @@ Além disso, é possível inverter o circuito, utilizando um resistor pull-down 
 
 ```
 const int buttonPin = 2;
-const int ledPin = LED_BUILTIN;
-
-int buttonPushCounter = 0;
+const int ledPin = 13 ;
 
 int buttonState = 0;
 
-int lastButtonState = 0;
-
 void setup() {
-  pinMode(buttonPin, INPUT);
-  pinMode(ledPin, OUTPUT);
-  Serial.begin(9600);
+ 
+ pinMode(ledPin, OUTPUT);
+
+ pinMode(buttonPin, INPUT);
 }
 
 void loop() {
- 
-  buttonState = digitalRead(buttonPin);
+buttonState = digitalRead(buttonPin);
 
-  if (buttonState != lastButtonState) {
-  
-    if (buttonState == HIGH) {
-      buttonPushCounter++;
-      Serial.println("on");
-      Serial.print("number of button pushes: ");
-      Serial.println(buttonPushCounter);
-    } else {
-      Serial.println("off");
-    }
-    delay(50);
-  }
-  
-  lastButtonState = buttonState;
+
+if (buttonState == HIGH) {
+ digitalWrite(ledPin, HIGH) ;
+} else {
+  digitalWrite(ledPin,LOW);
 }
+
 ```
 
 ![Figura](https://github.com/user-attachments/assets/97785591-5a9c-4034-b3de-900e08e79e9a)
