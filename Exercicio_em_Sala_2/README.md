@@ -1,6 +1,6 @@
 # Montagem Básica com LEDs
 ## Descrição
-Este projeto demonstra uma montagem básica utilizando um Arduino Uno e dois LEDs. O objetivo é aprender como controlar LEDs através do Arduino, ligando e desligando-os de forma sequencial.
+Este projeto demonstra uma montagem básica utilizando um Arduino Uno e dois LEDs. O objetivo é aprender como controlar LEDs através do Arduino, ligando e desligando-os de forma sequencial simulando luzes de sinalizaçao de garagem.
 
 ## Materiais Necessários
 + Arduino Uno
@@ -29,5 +29,35 @@ Este projeto demonstra uma montagem básica utilizando um Arduino Uno e dois LED
 
 
 Utilize os fios de conexão (jumpers) para ligar os pinos do Arduino aos componentes montados na protoboard.
+
+```
+const int ledPin1 = 4;
+const int ledPin2 = 5;
+const int ledPin3 = 6;
+
+void setup() {
+// Define os pinos dos LEDs como saídas
+pinMode(ledPin1, OUTPUT);
+pinMode(ledPin2, OUTPUT);
+pinMode(ledPin3, OUTPUT);
+}
+
+void loop() {
+// Acende o primeiro LED e espera 1 segundo
+digitalWrite(ledPin1, HIGH);
+delay(1000);
+digitalWrite(ledPin1, LOW);
+
+
+digitalWrite(ledPin2, HIGH);
+delay(1000);
+digitalWrite(ledPin2, LOW);
+
+
+digitalWrite(ledPin3, HIGH);
+delay(1000);
+digitalWrite(ledPin3, LOW);
+}
+```
 
 + ![Figura](https://github.com/user-attachments/assets/faa4167d-cc3b-4587-bd64-24a5f8646cf4)
