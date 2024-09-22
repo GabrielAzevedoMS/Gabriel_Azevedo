@@ -2,7 +2,24 @@
 O programa Blink é um dos exemplos mais básicos e tradicionais para quem está começando a trabalhar com microcontroladores, como o Arduino. Ele faz com que um LED pisque (ou "blink") repetidamente, ligando e desligando em intervalos regulares. Este exemplo é útil para testar se o ambiente de desenvolvimento e o hardware estão funcionando corretamente.
 
 ## Circuito a ser montado
-[esquema.pdf](https://github.com/user-attachments/files/16919831/esquema.pdf)
+## código
+```
+void setup() {
+
+pinMode(LED_BUILTIN, OUTPUT);
+}
+
+
+void loop() {
+digitalWrite(LED_BUILTIN, HIGH); 
+delay(1000); // espera por um segundo
+digitalWrite(LED_BUILTIN, LOW); 
+delay(1000); // espera por um segundo
+}
+```
+
+
+
 
 ![Figura](https://github.com/user-attachments/assets/e43f4321-18c8-464e-aea4-54e1703bfaae)
 
