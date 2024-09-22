@@ -1,4 +1,4 @@
-# Montagem Básica com led builtin e Botão
+# Contagem de pressionamentos de botão.
 
 
 ## Descrição
@@ -24,23 +24,39 @@ Além disso, é possível inverter o circuito, utilizando um resistor pull-down 
 ## Diagrama de Montagem
 
 ```
-const int ledPin = 13;      
-const int buttonPin = 2;    
-int buttonState = 0;       
+const int buttonPin = 2;
+const int ledPin = LED_BUILTIN;
+
+int buttonPushCounter = 0;
+
+int buttonState = 0;
+
+int lastButtonState = 0;
 
 void setup() {
-    pinMode(ledPin, OUTPUT);   
-    pinMode(buttonPin, INPUT); 
+  pinMode(buttonPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600);
 }
 
 void loop() {
-    buttonState = digitalRead(buttonPin); 
+ 
+  buttonState = digitalRead(buttonPin);
 
-    if (buttonState == HIGH) { 
-        digitalWrite(ledPin, HIGH); 
+  if (buttonState != lastButtonState) {
+  
+    if (buttonState == HIGH) {
+      buttonPushCounter++;
+      Serial.println("on");
+      Serial.print("number of button pushes: ");
+      Serial.println(buttonPushCounter);
     } else {
-        digitalWrite(ledPin, LOW); 
+      Serial.println("off");
     }
+    delay(50);
+  }
+  
+  lastButtonState = buttonState;
 }
 ```
 
