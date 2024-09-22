@@ -33,4 +33,45 @@ O programa funciona da seguinte maneira:
 
 * Use a protoboard para montar o circuito e organizar as conexões.
 * Utilize fios de conexão (jumpers) para ligar os componentes ao Arduino.
+
+## Código
+
+```
+const int buttonPin = 2;
+const int ledPin = LED_BUILTIN;
+
+int buttonPushCounter = 0;
+
+int buttonState = 0;
+
+int lastButtonState = 0;
+
+void setup() {
+  pinMode(buttonPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+
+  buttonState = digitalRead(buttonPin);
+
+
+  if (buttonState != lastButtonState) {
+
+    if (buttonState == HIGH) {
+      buttonPushCounter++;
+      Serial.println("on");
+      Serial.print("number of button pushes: ");
+      Serial.println(buttonPushCounter);
+    } else {
+      Serial.println("off");
+    }
+    delay(50);
+  }
+  
+
+  lastButtonState = buttonState;
+}
+```
 ![botao](https://github.com/user-attachments/assets/c73839db-3213-497c-a0c6-94e23bb5d495)
