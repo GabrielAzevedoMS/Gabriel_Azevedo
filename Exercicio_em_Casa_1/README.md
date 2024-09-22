@@ -1,4 +1,4 @@
-# Montagem Básica com LEDs e Botão
+# Montagem Básica com led builtin e Botão
 
 
 ## Descrição
@@ -23,6 +23,26 @@ Além disso, é possível inverter o circuito, utilizando um resistor pull-down 
 + Protoboard
 ## Diagrama de Montagem
 
+```
+const int ledPin = 13;      
+const int buttonPin = 2;    
+int buttonState = 0;       
+
+void setup() {
+    pinMode(ledPin, OUTPUT);   
+    pinMode(buttonPin, INPUT); 
+}
+
+void loop() {
+    buttonState = digitalRead(buttonPin); 
+
+    if (buttonState == HIGH) { 
+        digitalWrite(ledPin, HIGH); 
+    } else {
+        digitalWrite(ledPin, LOW); 
+    }
+}
+```
 
 ![Figura](https://github.com/user-attachments/assets/97785591-5a9c-4034-b3de-900e08e79e9a)
 
