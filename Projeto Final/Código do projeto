@@ -1,0 +1,80 @@
+
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+#include <Servo.h>
+
+// Configurações do Servo
+Servo servo;
+const int ledPin = 9;         // Pino do LED
+const int buttonRightPin = 2; // Pino do botão da direita
+const int buttonLeftPin = 3;  // Pino do botão da esquerda
+const int servoPin = 4;       // Pino do servo
+
+// Configurações do LCD
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+bool gameActive = false;       // Controle do estado do jogo
+int scoreLeft = 0;             // Placar do jogador da esquerda
+int scoreRight = 0;            // Placar do jogador da direita
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  pinMode(buttonRightPin, INPUT_PULLUP); 
+  pinMode(buttonLeftPin, INPUT_PULLUP);  
+  
+  servo.attach(servoPin);
+  servo.write(90); // Posição inicial do servo (central)
+
+  lcd.begin(16, 2);  // Configura o LCD com 16 colunas e 2 linhas
+  lcd.backlight();
+  lcd.print("Placar:");
+  atualizarPlacar(); // Atualiza o placar no LCD
+  digitalWrite(ledPin, HIGH); // LED começa aceso
+}
+
+void loop() {
+  if (!gameActive) {
+    gameActive = true; // O jogo está ativo
+    delay(random(2000, 5000)); // Espera um tempo aleatório entre 2 e 5 segundos
+    digitalWrite(ledPin, LOW); // Apaga o LED
+    esperarVencedor();
+    gameActive = false; // O jogo terminou
+    digitalWrite(ledPin, HIGH); // Acende o LED novamente para o próximo jogo
+  }
+}
+
+void esperarVencedor() {
+  unsigned long startWait = millis(); // Marca o início da espera
+
+  while (true) {
+    if (digitalRead(buttonRightPin) == LOW) {
+      delay(1000); // Delay para garantir que o botão foi pressionado
+      servo.write(0); // Levanta o servo para a direita
+      delay(1000);      // Mantém por 1 segundo
+      servo.write(90);  // Retorna à posição central
+      scoreRight++;     // Incrementa o placar do jogador da direita
+      atualizarPlacar(); // Atualiza o placar no LCD
+      break;            // Sai do loop
+    } else if (digitalRead(buttonLeftPin) == LOW) {
+      delay(1000); // Delay para garantir que o botão foi pressionado
+      servo.write(180);   // Levanta o servo para a esquerda
+      delay(1000);      // Mantém por 1 segundo
+      servo.write(90);  // Retorna à posição central
+      scoreLeft++;      // Incrementa o placar do jogador da esquerda
+      atualizarPlacar(); // Atualiza o placar no LCD
+      break;            // Sai do loop
+    }
+
+    // Se passou mais de 5 segundos sem resposta, encerra a espera
+    if (millis() - startWait > 5000) {
+      break; // Sai do loop se ninguém pressionou
+    }
+  }
+}
+
+void atualizarPlacar() {
+  lcd.setCursor(0, 1); // Move o cursor para a segunda linha
+  lcd.print("E:"); 
+  lcd.print(scoreLeft); 
+  lcd.print(" D:"); 
+  lcd.print(scoreRight);
+}
